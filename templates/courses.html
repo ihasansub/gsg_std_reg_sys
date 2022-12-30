@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body{
+            font-family: Arial;
+        }
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+</head>
+<body>
+    <h2>Courses List</h2>
+    <button onclick="window.location.href='./'">Back to Home</button>
+    <table>
+        <thead>
+            <th>Course ID</th>
+            <th>Course Level</th>
+            <th>Course Name</th>
+            <th>Max Capacity</th>
+            <th>Rate/Hour</th>
+        </thead>
+        <tbody>
+            {%for course in data%}
+            <tr>
+                <td>{{course.course_id}}</td>
+                <td>{{course.level_name}}</td>
+                <td>{{course.course_name}}</td>
+                <td>{{course.max_capacity}}</td>
+                <td>{{course.rate_per_hour}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+</body>
+</html>

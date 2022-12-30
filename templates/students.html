@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registered Students</title>
+
+    <style>
+        body{
+            font-family: Arial;
+        }
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+</head>
+<body>
+    <h2>Students List</h2>
+    <button onclick="window.location.href='./'">Back to Home</button>
+    <table>
+        <thead>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Student Level</th>
+            <th>Date of Birth</th>
+            <th>Mobile Number</th>
+            <th>Email</th>
+            <th>Address</th>
+        </thead>
+        <tbody>
+            {%for std in data%}
+            <tr>
+                <td>{{std.student_id}}</td>
+                <td>{{std.student_name}}</td>
+                <td>{{std.level_name}}</td>
+                <td>{{std.dob}}</td>
+                <td>{{std.mobile_number}}</td>
+                <td>{{std.email}}</td>
+                <td>{{std.address}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+</body>
+</html>

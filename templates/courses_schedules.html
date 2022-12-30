@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses Schedules</title>
+
+    <style>
+        body{
+            font-family: Arial;
+        }
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+</head>
+<body>
+    <h2>Courses Schedules</h2>
+    <button onclick="window.location.href='./'">Back to Home</button>
+    <table>
+        <thead>
+            <th>Course ID</th>
+            <th>Course Name</th>
+            <th>Day</th>
+            <th>Start Time</th>
+            <th>Duration</th>
+            <th>End Time</th>
+        </thead>
+        <tbody>
+            {%for sch in data%}
+            <tr>
+                <td>{{sch.course_id}}</td>
+                <td>{{sch.course_name}}</td>
+                <td>{{sch.day}}</td>
+                <td>{{sch.start_time}}</td>
+                <td>{{sch.duration}}</td>
+                <td>{{sch.end_time}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+</body>
+</html>
