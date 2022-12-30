@@ -1,3 +1,5 @@
+import json
+
 import mariadb
 import sys
 
@@ -100,6 +102,7 @@ def student_schedule(student_id):
     else:
         print("There is no such student")
 
+
 def get_student_details(student_id):
     cur.execute(f"""select s.*, c.mobile_number, c.email, l.level_name from students s
                                         left join contacts c on s.contact_id = c.contact_id
@@ -112,13 +115,14 @@ def get_student_details(student_id):
                          'email': row[7], 'level_name': row[8]})
     return students
 
+
 def get_course_details(course_id):
     cur.execute(f"""select * from courses c where c.course_id = {course_id};""")
     courses_list = cur.fetchall()
     courses = {}
     for row in courses_list:
         courses.update({'course_id': row[0], 'level_id': row[1], 'course_name': row[2],
-                         'max_cap': row[3], 'rate_hour': row[4]})
+                        'max_cap': row[3], 'rate_hour': row[4]})
     return courses
 
 
@@ -155,14 +159,23 @@ def enroll(student_id, course_id):
     qry_chk = f"""select * from course_schedules where course_id = {course_id}"""
     cur.execute(qry_chk)
     count = cur.rowcount
-
+    thours = total_hours(course_id)
+    rate_hour = get_course_details(course_id)["rate_hour"]
+    total = thours * rate_hour
     # insert into enrollment history
     if count > 0:
         qry_enroll = f"""INSERT INTO enrollment_history (student_id, course_id, enroll_date, total_hours, total)
-                            values ({student_id}, {course_id}, curdate(), 0, 0);"""
+                            values ({student_id}, {course_id}, curdate(), {thours}, {total});"""
         cur.execute(qry_enroll)
         conn.commit()
         print("Enrollment Completed")
     else:
         print("Course has no schedules")
 
+
+def total_hours(course_id):
+    cur.execute(f"""select course_id, sum(duration) from course_schedules
+                    where course_id = {course_id}""")
+    thours = cur.fetchall()
+    th = int(thours[0][1])
+    return th

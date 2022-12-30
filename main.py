@@ -12,6 +12,7 @@ while True:
     5/ Display Student Schedule \t 6/ break""")
 
     action = input("Choose Action (type the number only) ")
+    # 1/ Register New Student
     if action == "1":
         student_name = input("Enter Student Name: ")
         dob = input('Enter a date formatted as yyyy-mm-dd: ')
@@ -52,6 +53,7 @@ while True:
         level_id = int(input("Enter level number form list above: "))
         functions.add_course(course_name, max_capacity, rate_per_hour, level_id)
 
+    # 4/ Create Course Schedule
     elif action == "4":
         # questions = [
         #     inquirer.List('day',
@@ -61,26 +63,17 @@ while True:
         # ]
         # answers = inquirer.prompt(questions)
         # day = answers['day']
-
         day = input("Enter Day")
         course_id = int(input("Enter course code: "))
         start_time = input("Enter start time: ")
         duration = int(input("Enter course duration: "))
 
-
         functions.course_schedule(day, course_id, start_time, duration)
 
+    # 5/ Display Student Schedule
     elif action == "5":
         student_id = input("Enter Student ID: ")
         functions.student_schedule(student_id)
-
-        # x = input("do you want to exit? (y/n)")
-        # if x == 'y':
-        #     break
-        # elif x == 'n':
-        #     True
-        # else:
-        #
 
     elif action == "6":
         print("Have a nice day!")

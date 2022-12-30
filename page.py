@@ -7,9 +7,11 @@ import jinja2
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def hello():
     return render_template("home.html")
+
 
 @app.route("/courses.html")
 def courses():
@@ -45,6 +47,7 @@ def students():
     resp = simplejson.dumps(std)
     resp = simplejson.loads(resp)
     return render_template("students.html", **resp)
+
 
 @app.route("/courses_schedules.html")
 def course_schedules():
